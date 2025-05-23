@@ -4,6 +4,8 @@ services:
   bot:
     build: .
     env_file: .env
+    volumes:
+      - .:/app
     depends_on:
       - mongo
 
