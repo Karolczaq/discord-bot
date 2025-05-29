@@ -3,14 +3,13 @@ import fs from "node:fs";
 import path from "node:path";
 import { Client, Events, GatewayIntentBits, Collection } from "discord.js";
 import { fileURLToPath } from "node:url";
-import { connectToDb } from "./db/mongo.js";
+import { db } from "./db/mongo.js";
 const token = process.env.DISCORD_TOKEN;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.once(Events.ClientReady, async (readyClient) => {
   try {
-    const db = await connectToDb();
     console.log(`Ready! Logged in as ${readyClient.user.tag}`);
   } catch (error) {
     console.error(error);

@@ -4,7 +4,7 @@ import "dotenv/config";
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
 
-export async function connectToDb() {
+async function connectToDb() {
   try {
     await client.connect();
     console.log("Connected to MongoDB");
@@ -14,3 +14,6 @@ export async function connectToDb() {
     process.exit(1);
   }
 }
+
+export { connectToDb };
+export const db = await connectToDb();

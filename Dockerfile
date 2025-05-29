@@ -7,4 +7,4 @@ RUN npm install
 
 COPY . .
 
-CMD sh -c "node deploy-commands.js && node index.js"
+CMD npm run dev

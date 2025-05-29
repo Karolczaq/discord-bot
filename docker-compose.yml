@@ -4,6 +4,17 @@ services:
   bot:
     build: .
     env_file: .env
+    develop:
+      watch:
+        - path: ./package.json
+          action: rebuild
+        - path: ./package-lock.json
+          action: rebuild
+        - path: .
+          target: /app
+          action: sync
+          ignore:
+            - node_modules/
     volumes:
       - .:/app
     depends_on:
