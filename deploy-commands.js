@@ -37,6 +37,14 @@ const rest = new REST().setToken(token);
 
 (async () => {
   try {
+    await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+      body: [],
+    });
+    console.log("Successfully deleted all guild commands.");
+
+    await rest.put(Routes.applicationCommands(clientId), { body: [] });
+    console.log("Successfully deleted all application commands.");
+
     console.log(`Started refreshing ${commands.length} commands...`);
     const data = await rest.put(
       Routes.applicationGuildCommands(clientId, guildId),
