@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { Client, Events, GatewayIntentBits, Collection } from "discord.js";
 import { fileURLToPath } from "node:url";
-import { db } from "./db/mongo.js";
+// import { db } from "./db/mongo.js";
 const token = process.env.DISCORD_TOKEN;
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -16,6 +16,7 @@ client.once(Events.ClientReady, async (readyClient) => {
   }
 });
 
+console.log("trying to login");
 client.login(token);
 
 client.commands = new Collection();
