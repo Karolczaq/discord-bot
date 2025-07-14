@@ -44,6 +44,23 @@ for (const folder of commandFolders) {
     }
   }
 }
+const eventsPath = path.join(process.cwd(), "events");
+const eventFiles = fs
+  .readdirSync(eventsPath)
+  .filter((file) => file.endsWith(".js"));
+
+for (const file of eventFiles) {
+  const filePath = path.join(eventsPath, file);
+  const event = await import(filePath);
+
+  if (event.default.once) {
+    client.once(event.default.name, (...args) =>
+      event.default.execute(...args)
+    );
+  } else {
+    client.on(event.default.name, (...args) => event.default.execute(...args));
+  }
+}
 
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
