@@ -18,12 +18,12 @@ export default {
   async execute(interaction) {
     const author = interaction.user;
     const target = interaction.options.getUser("target");
-    // if (author.id === target.id) {
-    //   return interaction.reply({
-    //     content: "You can't challenge yourself!",
-    //     ephemeral: true,
-    //   });
-    // }
+    if (author.id === target.id) {
+      return interaction.reply({
+        content: "You can't challenge yourself!",
+        ephemeral: true,
+      });
+    }
     const acceptButton = new ButtonBuilder()
       .setCustomId(`tictactoe_accept_${author.id}`)
       .setLabel("Accept Challenge")
